@@ -1,0 +1,55 @@
+<view>
+    <scroll-view scroll-y="true" bindscrolltolower="loadList" class="layout">
+
+        <!-- list start -->
+        <navigator wx:for="{{lists}}" wx:key="" class="hot-item-box" url="../component/group/group?groupId={{item.groupId}}" wx:item="item">
+             <view class="hot-item-top">
+                <view class="hot-img">
+                    <image src="{{item.goodsImg}}"></image>
+                </view>
+
+                <view class="hot-item-top-right">
+                    <text class="hot-item-title">{{item.goodsTitle}}--{{item.target}}</text>
+                    <view class="hot-item-price">{{item.groupSize}}/{{item.SumGroup}} 人拼车</view>
+                    <view class="hot-item-No-time-box">
+                        <view class="hot-item-No">仅差<text class="text-red">{{item.lessNum}}</text>人</view>
+                        <view class="hot-item-time">每人仅需 <text>{{item.transPrice}}</text>¥配送费</view>
+                    </view>
+                </view>
+            </view>
+            
+            <view class="hot-item-btm">
+                <view class="hot-item-user-box">
+                    <view wx:for="{{item.lists}}" wx:key="" class="hot-item-user-img">
+                        <image src="{{item.userImg}}" mode="widthFix"></image>
+                    </view>
+                </view>
+                <text class="hot-item-btn">参与</text>
+            </view>
+
+            <view class="hot-item-detail">
+                <view class="hot-item-user-box-detail">
+                    <view wx:for="{{[0,1,2]}}" wx:for-index="i" wx:for-item="item2" wx:key="" >
+                        <text>{{item2}}</text>
+                        <text space='ensp' >{{item.lists[i].goods}} 等</text>
+                    </view>
+                </view>
+                <!-- <text class="hot-item-btn">等商品正在热卖</text> -->
+            </view>
+
+        </navigator>
+        <!-- / list end -->
+
+        <!-- loading start -->
+        <!-- <view class="body-view">
+            <loading hidden="{{hidden}}">
+                加载中...
+            </loading>
+        </view> -->
+        <!-- / loading end -->
+
+        <!-- prompt message start --> 
+        <!-- <text class="{{tipShow ? 'promptShow' : 'promptHide'}}">没有更多内容了</text> -->
+        <!--  prompt message end -->
+    </scroll-view>
+</view>

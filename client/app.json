@@ -1,0 +1,64 @@
+{
+	"pages": [
+        "page/print/print",
+        "page/dandian/dandian",
+      "page/index/index",
+  "page/print/pay",
+    "page/food/food",
+    "page/pindan/pindan",
+    "page/dandian/search",
+		"page/shop/shop",
+    "page/count/count",
+    "page/component/detail/detail",
+    "page/component/group/group",
+    "page/print/upload",
+    "page/print/uploadFile",
+		"page/mine/mine"
+	],
+	"window": {
+		"navigationBarBackgroundColor": "white",
+		"navigationBarTextStyle": "black",
+		"backgroundColor": "#efefef",
+		"backgroundTextStyle": "dark",
+		"navigationBarTitleText": "贸大生活服务平台"
+	},
+	"tabBar": {
+		"color": "#878787",
+		"selectedColor": "#000",
+		"borderStyle": "black",
+		"backgroundColor": "#fcfcfc",
+		"list": [
+			{
+				"pagePath": "page/index/index",
+				"iconPath": "imgs/tabBar/home_2.png",
+				"selectedIconPath": "imgs/tabBar/home_1.png",
+				"text": "首页"
+			},
+      {
+        "pagePath": "page/pindan/pindan",
+        "iconPath": "imgs/tabBar/hot.png",
+        "selectedIconPath": "imgs/tabBar/hot_active.png",
+        "text": "热拼"
+      },
+      {
+        "pagePath": "page/dandian/dandian",
+        "iconPath": "imgs/tabBar/search.png",
+        "selectedIconPath": "imgs/tabBar/search_active.png",
+        "text": "单点"
+      },
+			{
+				"pagePath": "page/mine/mine",
+				"iconPath": "imgs/tabBar/mine_2.png",
+				"selectedIconPath": "imgs/tabBar/mine_1.png",
+				"text": "我的"
+			}
+		]
+	},
+	"networkTimeout": {
+		"request": 10000,
+		"connectSocket": 10000,
+		"uploadFile": 10000,
+		"downloadFile": 10000
+	},
+	"debug": true
+}

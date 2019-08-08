@@ -1,0 +1,39 @@
+<!--page/count/count.wxml-->
+<view id="adduser" class='whole'>
+        <view class="section">
+        <view class="title">请选择收货地点:</view>
+        </view>
+        <view class="inputView">
+        <view style='width:40%'>
+          <label class="loginLab">地点</label>
+        </view>
+        <picker bindchange="bindPickerChange2" value="{{index}}" range="{{location}}" class='input-text' name="location">
+        <view > {{location[index2]}}</view>
+         </picker>
+        </view>
+
+
+
+        <view class="inputView">
+        <view style='width:40%'>
+          <label class="loginLab">配送方式</label>
+        </view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='input-text' name="style">
+        <view > {{array[index]}}</view>
+         </picker>
+        </view>
+
+		<view class="list">
+			<view class="item" wx:for="{{cart.list}}" wx:for-index="id" wx:for-item="num" wx:key="id">
+				<view class="name ellipsis">{{goods[id].name}}</view>
+				<view class="total">￥{{goods[id].price*cart.list[id]}}</view>
+				<view class="reduce" data-id="{{id}}" bindtap="tapReduceCart">-</view>
+				<view class="num">{{num}}</view>
+				<view class="add" data-id="{{id}}" bindtap="tapAddCart">+</view>
+			</view>
+		</view>
+
+
+<button type='primary'>确认支付</button>
+
+  </view>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>打印店商家端</title>
+    <script src="js/config.js"></script>
+    <script type='text/javascript' src='js/jquery-3.3.1.min.js'></script>
+    <script type='text/javascript'>
+      function complete(path) {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/removefile",
+          data: {path: path},
+          success: function(data){
+            window.location.href = host + "/h5/print_merchant.html"
+          }
+        })
+      }
+
+      function logout() {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/logout",
+          success: function(data){
+            window.location.href = host + "/h5/merchant_login.html"
+          }
+        })
+      }
+  
+      var printfile
+      $.ajax({
+        type: "GET",
+        url: host + "/weapp/gettrxs",
+        async: false,
+        dataType: "json",
+        success: function(data){
+          console.log(data)
+          if(data.code != 0) {
+            alert('会话已过期，请重新登录')
+            location.href = host + '/h5/merchant_login.html'
+          }
+          else {
+            printfile = data.data.printfile
+          }
+        }
+      })
+    </script>
+  
+  </head>
+  
+  <body>
+    <a href="javascript:logout()">退出登录</a>
+    <table border='1'>
+      <tr>
+        <td>订单编号</td>
+        <td>文件</td>
+        <td>文件大小</td>
+        <td>页数</td>
+        <td>打印类型</td>
+        <td>单双面</td>
+        <td>份数</td>
+        <td>颜色</td>
+        <td>纸张大小</td>
+        <td>价钱</td>
+        <td>电话</td>
+        <td>创建时间</td>
+        <td>状态</td>
+        <td>操作</td>
+      </tr>
+      <script type='text/javascript'>
+      for(var i = 0; i < printfile.length; i++) {
+        document.write("<tr>")
+        document.write("<td>"+printfile[i].transaction+"</td>")
+        if(printfile[i].state=='未支付') {
+          document.write("<td><a href='"+host+"/"+printfile[i].path+"'>"+printfile[i].filename+"</a></td>")
+        }
+        else {
+          document.write("<td>"+printfile[i].filename+"</td>")
+        }
+        document.write("<td>"+printfile[i].filesize+"</td>")
+        document.write("<td>"+printfile[i].pages+"</td>")
+        document.write("<td>"+printfile[i].printtype+"</td>")
+        document.write("<td>"+printfile[i].side+"</td>")
+        document.write("<td>"+printfile[i].copies+"</td>")
+        document.write("<td>"+printfile[i].color+"</td>")
+        document.write("<td>"+printfile[i].pagesize+"</td>")
+        document.write("<td>"+printfile[i].price+"</td>")
+        document.write("<td>"+printfile[i].phone+"</td>")
+        document.write("<td>"+printfile[i].creationtime+"</td>")
+        document.write("<td>"+printfile[i].state+"</td>")
+        if(printfile[i].state=='未支付') {
+          document.write("<td><a href=\"javascript:complete('"+printfile[i].path+"')\">打印完成</a></td>")
+        }
+        else {
+          document.write("<td></td>")
+        }
+        document.write("</tr>")
+      }
+      </script>
+    </table>
+  </body>
+
+</html>

@@ -1,0 +1,3 @@
+<!--page/print/pay.wxml-->
+
+<button bindtap='payment'>请确认支付{{price}}元</button>

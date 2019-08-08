@@ -1,0 +1,2 @@
+<!--page/print/uploadFile.wxml-->
+<web-view src="{{url}}"></web-view>

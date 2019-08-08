@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>商家端</title>
+    <script src="js/config.js"></script>
+    <script type='text/javascript' src='js/jquery-3.3.1.min.js'></script>
+    <script type='text/javascript'>
+      function remove(id) {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/removeitem",
+          data: {id: id},
+          success: function(data){
+            window.location.href = host + "/h5/merchant_modify.html"
+          }
+        })
+      }
+
+      function logout() {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/logout",
+          success: function(data){
+            window.location.href = host + "/h5/merchant_login.html"
+          }
+        })
+      }
+
+      function checkform() {
+        if(document.forms["form1"]["name"].value == "") {
+          alert( "商品名不能为空" )
+          return false
+        }
+        else if(document.forms["form1"]["price"].value == "") {
+          alert( "价格不能为空" )
+          return false
+        }
+        else {
+          return true
+        }
+      }
+
+      function submit() {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/updategoods",
+          data: {
+            id: document.forms["form1"]["id"].value,
+            name: document.forms["form1"]["name"].value,
+            photo: document.forms["form1"]["photo"].value,
+            descpt: document.forms["form1"]["descpt"].value,
+            category: document.forms["form1"]["category"].value,
+            price: document.forms["form1"]["price"].value,
+          },
+          success: function(data){
+            if(data.code != 0) {
+              alert('会话已过期，请重新登录')
+              location.href = host + '/h5/merchant_login.html'
+            }
+            else {
+              location.href = host + '/h5/merchant_modify.html'
+            }
+          }
+        })
+      }
+
+      function modify(i) {
+        document.write("<form name='form1' onsubmit='return checkform()' action='javascript:submit()' method='POST'>")
+        document.write("编号 <input type='text' name='id' value='"+goods[i].id+"' disabled><br>")
+        document.write("商品名 <input type='text' name='name' value='"+goods[i].name+"'><br>")
+        document.write("照片网址 <input type='text' name='photo' value='"+goods[i].photo+"'><br>")
+        document.write("描述 <input type='text' name='descpt' value='"+goods[i].descpt+"'><br>")
+        document.write("种类 <input type='text' name='category' value='"+goods[i].category+"'><br>")
+        document.write("价格 <input type='text' name='price' value='"+goods[i].price+"'><br>")
+        document.write("<input type='submit' value='提交'><br>")
+        document.write("</form>")
+      }
+
+      function add() {
+        document.write("<form name='form1' onsubmit='return checkform()' action='javascript:submit()' method='POST'>")
+        document.write("商品名 <input type='text' name='name'><br>")
+        document.write("<input type='hidden' name='id' value='-1'>")
+        document.write("照片网址 <input type='text' name='photo'><br>")
+        document.write("描述 <input type='text' name='descpt'><br>")
+        document.write("种类 <input type='text' name='category'><br>")
+        document.write("价格 <input type='text' name='price'><br>")
+        document.write("<input type='submit' value='提交'><br>")
+        document.write("</form>")
+      }
+  
+      var goods
+      $.ajax({
+        type: "GET",
+        url: host + "/weapp/getgoods",
+        async: false,
+        dataType: "json",
+        success: function(data){
+          console.log(data)
+          if(data.code != 0) {
+            alert('会话已过期，请重新登录')
+            location.href = host + '/h5/merchant_login.html'
+          }
+          else {
+            goods = data.data.goods
+          }
+        }
+      })
+    </script>
+  
+  </head>
+  
+  <body>
+    <a href="merchant.html">管理订单</a>
+    <a href="javascript:logout()">退出登录</a>
+    <table border='1'>
+      <tr>
+        <td>编号</td>
+        <td>商品名</td>
+        <td>照片网址</td>
+        <td>描述</td>
+        <td>销量</td>
+        <td>种类</td>
+        <td>价格</td>
+        <td>操作</td>
+      </tr>
+      <script type='text/javascript'>
+      for(var i = 0; i < goods.length; i++) {
+        document.write("<tr>")
+        document.write("<td>"+goods[i].id+"</td>")
+        document.write("<td>"+goods[i].name+"</td>")
+        document.write("<td><a href='"+goods[i].photo+"'>"+goods[i].photo+"</a></td>")
+        document.write("<td>"+goods[i].descpt+"</td>")
+        document.write("<td>"+goods[i].sales+"</td>")
+        document.write("<td>"+goods[i].category+"</td>")
+        document.write("<td>"+goods[i].price+"</td>")
+        document.write("<td><a href=\"javascript:modify('"+i+"')\">修改</a> <a href=\"javascript:remove('"+goods[i].id+"')\">删除</a></td>")
+        document.write("</tr>")
+      }
+      </script>
+    </table>
+    <a href="javascript:add()">增加商品</a>
+
+  </body>
+
+</html>

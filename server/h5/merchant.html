@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>打印店商家端</title>
+    <script src="js/config.js"></script>
+    <script type='text/javascript' src='js/jquery-3.3.1.min.js'></script>
+    <script type='text/javascript'>
+      function complete(transaction) {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/produced",
+          data: {transaction: transaction},
+          success: function(data){
+            window.location.href = host + "/h5/merchant.html"
+          }
+        })
+      }
+
+      function logout() {
+        $.ajax({
+          type: "POST",
+          url: host + "/weapp/logout",
+          success: function(data){
+            window.location.href = host + "/h5/merchant_login.html"
+          }
+        })
+      }
+  
+      var trxs
+      $.ajax({
+        type: "GET",
+        url: host + "/weapp/gettrxs",
+        async: false,
+        dataType: "json",
+        success: function(data){
+          console.log(data)
+          if(data.code != 0) {
+            alert('会话已过期，请重新登录')
+            location.href = host + '/h5/merchant_login.html'
+          }
+          else {
+            trxs = data.data.trxs
+          }
+        }
+      })
+  
+      var goods
+      $.ajax({
+        type: "GET",
+        url: host + "/weapp/getgoods",
+        async: false,
+        dataType: "json",
+        success: function(data){
+          console.log(data)
+          if(data.code != 0) {
+            alert('会话已过期，请重新登录')
+            location.href = host + '/h5/merchant_login.html'
+          }
+          else {
+            goods = data.data.goods
+          }
+        }
+      })
+    </script>
+  
+  </head>
+  
+  <body>
+    <a href="merchant_modify.html">管理商品</a>
+    <a href="javascript:logout()">退出登录</a>
+    <table border='1'>
+      <tr>
+        <td>订单编号</td>
+        <td>订单内容</td>
+        <td>价格</td>
+        <td>电话</td>
+        <td>备注</td>
+        <td>评论</td>
+        <td>创建时间</td>
+        <td>支付时间</td>
+        <td>制作完成时间</td>
+        <td>配送时间</td>
+        <td>送达时间</td>
+        <td>状态</td>
+        <td>操作</td>
+      </tr>
+      <script type='text/javascript'>
+      for(var i = 0; i < trxs.length; i++) {
+        document.write("<tr>")
+        document.write("<td>"+trxs[i].transaction+"</td>")
+        document.write("<td>")
+        items = JSON.parse(trxs[i].itemlist)
+        Object.keys(items).forEach(function(key){
+          document.write(goods[key].name+": ")
+          document.write(items[key]+"<br>")
+        })
+        document.write("</td>")
+        document.write("<td>"+trxs[i].price+"</td>")
+        document.write("<td>"+trxs[i].phone+"</td>")
+        document.write("<td>"+trxs[i].remark+"</td>")
+        document.write("<td>"+trxs[i].comment+"</td>")
+        document.write("<td>"+trxs[i].creationtime+"</td>")
+        document.write("<td>"+trxs[i].paytime+"</td>")
+        document.write("<td>"+trxs[i].producttime+"</td>")
+        document.write("<td>"+trxs[i].deliverytime+"</td>")
+        document.write("<td>"+trxs[i].completetime+"</td>")
+        document.write("<td>"+trxs[i].state+"</td>")
+        if(trxs[i].state=='未支付') {
+          document.write("<td><a href=\"javascript:complete('"+trxs[i].transaction+"')\">制作完成</a></td>")
+        }
+        else {
+          document.write("<td></td>")
+        }
+        document.write("</tr>")
+      }
+      </script>
+    </table>
+  </body>
+
+</html>

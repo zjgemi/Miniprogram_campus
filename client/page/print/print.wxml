@@ -1,0 +1,82 @@
+<!--page/print/print.wxml-->
+<view class='title'>文印中心</view>
+
+<view class='head'>
+<view class='sub-head'>文印中心</view>
+<view class='sub-head'>99%好评</view>
+<view class='sub-head'>专业.信誉</view>
+</view>
+
+<view class=' page_row'>  
+  <view class="nav" wx:for='{{nav_title}}' wx:key="index">    
+    <view class="nav_item page_row {{shownavindex == index? 'on' : ''}}" bindtap="click_nav" data-index="{{index}}">      
+    <view class="content">{{item}}        
+      <view class="red {{shownavindex == index? 'icon' : 'no_icon'}}"></view>       </view>    
+    </view>  
+  </view>
+</view>
+
+<view class='nav_centent_arr' wx:if="{{nav_centent.length}}">  
+<view style="height:500rpx">    
+<block wx:for="{{nav_centent}}" wx:key="index">     
+ <view class='nav_centent'>{{item}}</view>    
+ </block> 
+</view> 
+</view>
+
+
+
+
+
+<view class="swiper-container">  
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">  
+  <block wx:for="{{imgUrls}}" wx:key="unique">      
+      <swiper-item>       
+      <image src="{{item}}" class="img" bindtap="swipclick" />   
+       </swiper-item>   
+  </block>  
+  </swiper>
+  </view>
+
+<!-- <view class='introduction'></view> -->
+
+<view class='picture'>
+<view style='width:25%'>
+<image class='pic' src='/imgs/baojia.png' mode='widthFix'></image> 
+</view>
+<view style='width:25%'>
+<image class='pic' src='/imgs/dayang.png' mode='widthFix'></image> 
+</view>
+<view style='width:25%'>
+<image class='pic' src='/imgs/pinzhi.png' mode='widthFix'></image> 
+</view>
+<view style='width:25%'>
+<image class='pic' src='/imgs/peisong.png' mode='widthFix'></image> 
+</view>
+</view>
+
+<view class='contact'>
+    <view class='upload'>
+        <button class='button' bindtap='toUpload' > 用户上传</button>
+        <button class='button'> 商家登录</button>
+        <button class="userinfo-nickname"  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
+
+                <!-- <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
+            <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text> -->
+    </view>
+
+
+    <view class='right'>
+      <view class='right_top'>
+        联系我们
+      </view>
+      <view class='right_bottom'>
+      <text>
+      手机：
+      电话：
+      ＱＱ：
+      地址：
+      </text>
+      </view>
+    </view>
+</view>

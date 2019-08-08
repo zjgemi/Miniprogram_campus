@@ -1,0 +1,98 @@
+
+<view style='height:50rpx;'></view>
+
+<form bindsubmit="formSubmit">
+
+ <picker bindchange="bindPickerChange0" value="{{brandindex}}" range="{{brands}}" name="type">
+<view class='inputView'>
+<view >
+    <view class="picker" >
+      <view class='block1'>打印种类：</view>
+      <view class='block2'>{{brands[brandindex]}}</view>
+      <view class='block3'>   <image src='/imgs/angle.png' class='triangle' mode='widthFix'></image></view>
+    </view>
+</view>
+</view>
+</picker>
+
+
+<picker bindchange="bindPickerChange1" value="{{index1}}" range="{{object1}}" name="side">
+<view class='inputView'>
+<view >
+    <view class="picker" >
+      <view class='block1'>单双面：</view>
+      <view class='block2'>{{object1[index1]}}</view>
+      <view class='block3'>   <image src='/imgs/angle.png' class='triangle' mode='widthFix'></image></view>
+    </view>
+</view>
+</view>
+</picker>
+
+
+
+<radio-group class='phone' name='phone' >
+<radio value='choosePhone' bindtap='usePhone'>选择电话</radio>
+<picker value='{{index_phone}}' range='{{phone}}' name='phone1' disabled="{{disable1?true:false}}" class='input'>{{phone[index_phone]}}</picker>
+<radio value='addPhone' bindtap='addPhone' >新增电话</radio>
+<input type="input-text" name="phone2"  class="inputText" placeholder="请输入电话" disabled="{{disable2?true:false}}" placeholder-class='place-holder' class='input'></input>
+</radio-group>
+
+<!-- 
+        <view class="inputView">
+        <view style='width:40%'>
+          <label class="loginLab">预约电话</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="phone"  class="inputText" placeholder="请输入电话" placeholder-class='placeholder'/>
+        </view>
+        </view> -->
+
+
+
+<picker bindchange="bindPickerChange2" value="{{index2}}" range="{{object2}}" name="number">
+<view class='inputView'>
+<view >
+    <view class="picker" >
+      <view class='block1'>份数：</view>
+      <view class='block2'>{{object2[index2]}}</view>
+      <view class='block3'>   <image src='/imgs/angle.png' class='triangle' mode='widthFix'></image></view>
+    </view>
+</view>
+</view>
+</picker>
+
+
+
+<picker bindchange="bindPickerChange3" value="{{index3}}" range="{{object3}}" name="color">
+<view class='inputView'>
+<view >
+    <view class="picker" >
+      <view class='block1'>颜色：</view>
+      <view class='block2'>{{object3[index3]}}</view>
+      <view class='block3'>   <image src='/imgs/angle.png' class='triangle' mode='widthFix'></image></view>
+    </view>
+</view>
+</view>
+</picker>
+
+
+<picker bindchange="bindPickerChange4" value="{{index4}}" range="{{object4}}" name="size">
+<view class='inputView'>
+<view >
+    <view class="picker" >
+      <view class='block1'>大小：</view>
+      <view class='block2'>{{object4[index4]}}</view>
+      <view class='block3'>   <image src='/imgs/angle.png' class='triangle' mode='widthFix'></image></view>
+    </view>
+</view>
+</view>
+</picker>
+
+<view style='height:200rpx;'></view>
+
+        <view class="button">
+            <button size='mini' form-type='submit'>上传文件</button>            <!-- <button size='mini'  type='primary' >提交</button> -->
+        </view>
+</form>
+
+

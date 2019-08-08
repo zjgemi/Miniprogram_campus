@@ -1,0 +1,100 @@
+.picker{
+position: relative;
+left: 50rpx;
+display: flex;
+flex-direction: row;
+}
+.inputView {
+  width: 90%;
+  left: 40rpx;
+  background-color: #fff;
+  line-height: 80rpx;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30rpx;
+  border: 1rpx solid black;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.block1{
+  position: relative;
+  width: 250rpx;
+}
+
+.phone{
+   width: 90%;
+  left: 40rpx;
+  background-color: #fff;
+  /* line-height: 80rpx; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+  border: 1rpx solid black;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+.input{
+
+  width: 80%;
+  left: 80rpx;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  color: gray;
+  border: 1rpx solid black;
+}
+
+.place-holder{
+position: absolute;
+left: 120rpx;
+  justify-content: center;
+}
+
+
+.block2{
+  align-content: center;
+  text-align: center;
+  position: relative;
+  width: 50%;
+  background-color: white;
+}
+
+.block3{
+  top: 28rpx;
+  position: absolute;
+  left:580rpx;
+}
+ 
+ .button{
+  left:250rpx;
+ position:absolute;
+size: 10%;
+ display: flex;
+ flex-direction: column;
+ align-items: left;
+ padding: 0rpx 0rpx;
+ color: #333;
+}
+
+
+.triangle{
+  position: absolute;
+  width: 20rpx;
+}
+
+.placeholder{
+  position: absolute;
+  top:12rpx;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  /* font-size: 35rpx; */
+  color: #6e6c6c;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  font-size: smaller;
+  
+}

@@ -1,0 +1,8 @@
+<!--page/food/food.wxml-->
+<view>
+<button bindtap='toSingle'>单点</button>
+</view>
+
+<view>
+<button bindtap='toPinche'>拼车</button>
+</view>
